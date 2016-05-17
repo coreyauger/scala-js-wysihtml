@@ -39,22 +39,25 @@ object ParseRules {
 
   val simpleParserRules = ParseRules(
     tags = js.Dynamic.literal(
-      "h1"     -> js.Object,
-      "h2"     -> js.Object,
-      "h3"     -> js.Object,
-      "h4"     -> js.Object,
-      "strong" -> js.Object,
-      "b"      -> js.Object,
-      "i"      -> js.Object,
-      "em"     -> js.Object,
-      "br"     -> js.Object,
-      "p"      -> js.Object,
-      "div"    -> js.Object,
-      "span"   -> js.Object,
-      "ul"     -> js.Object,
-      "ol"     -> js.Object,
-      "li"     -> js.Object,
-      "a"      -> js.Dynamic.literal(
+      "h1"      -> js.Object,
+      "h2"      -> js.Object,
+      "h3"      -> js.Object,
+      "h4"      -> js.Object,
+      "strong"  -> js.Object,
+      "article" -> js.Object,
+      "section" -> js.Object,
+      "code"    -> js.Object,
+      "b"       -> js.Object,
+      "i"       -> js.Object,
+      "em"      -> js.Object,
+      "br"      -> js.Object,
+      "p"       -> js.Object,
+      "div"     -> js.Object,
+      "span"    -> js.Object,
+      "ul"      -> js.Object,
+      "ol"      -> js.Object,
+      "li"      -> js.Object,
+      "a"       -> js.Dynamic.literal(
         "set_attributes" -> js.Dynamic.literal(
           "target" -> "_blank",
           "rel"    -> "nofollow"

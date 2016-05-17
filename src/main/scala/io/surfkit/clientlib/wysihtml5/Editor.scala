@@ -4,6 +4,7 @@ import org.scalajs.dom
 import org.scalajs.dom.ext.Color
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
+import org.scalajs.dom.raw.Event
 
 /**
  * Created by corey auger
@@ -28,7 +29,7 @@ class Editor(domId: String, options: EditorOptions) extends js.Object{
   def config():EditorOptions = js.native
   def cleanUp(rules:ParseRules):Unit = js.native
 
-  def on(event: String, f: js.Function): Unit = js.native
+  def on(event: String, f: js.Function1[Event, Unit]): Unit = js.native
 }
 
 class WysihtmlEditor(domId: String, options: EditorOptions) {
@@ -47,19 +48,19 @@ class WysihtmlEditor(domId: String, options: EditorOptions) {
   def cleanUp(rules:ParseRules):Unit = editor.cleanUp(rules)
 
   //https://github.com/Voog/wysihtml/wiki/Events
-  def load(f: (Unit) => Unit) = editor.on("load",f)
-  def focus(f: (Unit) => Unit) = editor.on("focus", f)
-  def focusComposer(f: (Unit) => Unit) = editor.on("focus:composer", f)
-  def focusTextarea(f: (Unit) => Unit) = editor.on("focus:textarea", f)
-  def blur(f: (Unit) => Unit) = editor.on("blur", f)
-  def blurComposer(f: (Unit) => Unit) = editor.on("blur:composer", f)
-  def blurTextarea(f: (Unit) => Unit) = editor.on("blur:textarea", f)
-  def change(f: (String) => Unit) = editor.on("change", f)
-  def changeComposer(f: (String) => Unit) = editor.on("change:composer", f)
-  def changeTextarea(f: (String) => Unit) = editor.on("change:textarea", f)
-  def paste(f: (String) => Unit) = editor.on("paste", f)
-  def pasteComposer(f: (String) => Unit) = editor.on("paste:composer", f)
-  def pasteTextarea(f: (String) => Unit) = editor.on("paste:textarea", f)
+  def load(f: (Event) => Unit) = editor.on("load",f)
+  def focus(f: (Event) => Unit) = editor.on("focus", f)
+  def focusComposer(f: (Event) => Unit) = editor.on("focus:composer", f)
+  def focusTextarea(f: (Event) => Unit) = editor.on("focus:textarea", f)
+  def blur(f: (Event) => Unit) = editor.on("blur", f)
+  def blurComposer(f: (Event) => Unit) = editor.on("blur:composer", f)
+  def blurTextarea(f: (Event) => Unit) = editor.on("blur:textarea", f)
+  def change(f: (Event) => Unit) = editor.on("change", f)
+  def changeComposer(f: (Event) => Unit) = editor.on("change:composer", f)
+  def changeTextarea(f: (Event) => Unit) = editor.on("change:textarea", f)
+  def paste(f: (Event) => Unit) = editor.on("paste", f)
+  def pasteComposer(f: (Event) => Unit) = editor.on("paste:composer", f)
+  def pasteTextarea(f: (Event) => Unit) = editor.on("paste:textarea", f)
 
   // https://github.com/Voog/wysihtml/wiki/Supported-Commands
   def addTableCells(cells: InsertTableCells) = editor.composer.commands.exec("addTableCells", cells.name)
@@ -75,8 +76,8 @@ class WysihtmlEditor(domId: String, options: EditorOptions) {
   def foreColor(color: Color) = editor.composer.commands.exec("foreColor", color.toString)
   def foreColorStyle(color: Color) = editor.composer.commands.exec("foreColorStyle", color.toString)
   //Please note: formatInline can be used to format the current selection into any inline element (span, strong, time, …). The following is an example using the SPAN tag.
-  def formatBlock(format: Format) = editor.composer.commands.exec("formatBlock", format.tagName, format.className, format.classRegex)
-  def formatInline(format: Format) = editor.composer.commands.exec("formatInline", format.tagName, format.className, format.classRegex)
+  def formatBlock(format: Format) = editor.composer.commands.exec("formatBlock", format)
+  def formatInline(format: Format) = editor.composer.commands.exec("formatInline", format)
   def insertHTML(html: String) = editor.composer.commands.exec("insertHTML", html)
   def insertImage(img: Img) = editor.composer.commands.exec("insertImage", img)
   def insertLineBreak() = editor.composer.commands.exec("insertLineBreak")
@@ -104,7 +105,7 @@ trait EditorOptions extends js.Object{
   var parserRules: js.UndefOr[ParseRules] = js.native
   var pasteParserRulesets: js.UndefOr[js.Array[ParseRules]] = js.native
   var copyedFromMarking: js.UndefOr[String] = js.native
-  var parser: js.UndefOr[js.Function2[js.Any,js.Any,js.Any]] = js.native
+  var parser: js.UndefOr[(String, js.Any) => String] = js.native
   var classNames: js.UndefOr[ClassNames] = js.native
   var cleanUp: js.UndefOr[Boolean] = js.native
   var useLineBreaks: js.UndefOr[Boolean] = js.native
@@ -125,7 +126,7 @@ object EditorOptions {
         parserRules: js.UndefOr[ParseRules] = js.undefined,
         pasteParserRulesets: js.UndefOr[js.Array[ParseRules]] = js.undefined,
         copyedFromMarking: js.UndefOr[String] = js.undefined,
-        parser: js.UndefOr[js.Function2[js.Any,js.Any,js.Any]] = js.undefined,
+        parser: js.UndefOr[(String, js.Any) => String] = js.undefined,
         classNames: js.UndefOr[ClassNames] = js.undefined,
         cleanUp: js.UndefOr[Boolean] = js.undefined,
         useLineBreaks: js.UndefOr[Boolean] = js.undefined,

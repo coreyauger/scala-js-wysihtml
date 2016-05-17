@@ -77,17 +77,17 @@ object Link{
 
 @js.native
 trait Format extends js.Object{
-  var tagName: js.UndefOr[String] = js.native
+  var nodeName: js.UndefOr[String] = js.native
   var className: js.UndefOr[String] = js.native
   var classRegex: js.UndefOr[String] = js.native
 }
 object Format{
   def apply(
-         tagName: js.UndefOr[String] = js.undefined,
+         nodeName: js.UndefOr[String] = js.undefined,
          className: js.UndefOr[String] = js.undefined,
          classRegex: js.UndefOr[String] = js.undefined): Format = {
     val result = js.Dynamic.literal()
-    tagName.foreach(result.tagName = _)
+    nodeName.foreach(result.tagName = _)
     className.foreach(result.className = _)
     classRegex.foreach(result.classRegex = _)
     result.asInstanceOf[Format]

@@ -12,8 +12,10 @@ import scala.scalajs.js.annotation.JSName
 class Commands extends js.Object{
   def support(command: String):Boolean = js.native
   def exec(command: String, value:  js.Any*): js.Any = js.native
+
   def remove(command: String, value: js.Any*): js.Any = js.native
   def state(command: String, value: js.Any*): js.Any = js.native
   def stateValue(value: js.Any): js.Any = js.native
 }
+
 
