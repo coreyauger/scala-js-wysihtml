@@ -5,7 +5,12 @@ import sbt.Keys._
 sonatypeSettings
 
 lazy val root = project.in(file("."))
-  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSPlugin).settings(
+  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
+  resolvers += "NextWave Repo" at "http://maxdevmaster.cloudapp.net:4343/artifactory/nxtwv-maven/",
+  publishTo := Some("NextWave Repo" at "http://maxdevmaster.cloudapp.net:4343/artifactory/nxtwv-maven/")
+  //  publishMavenStyle :=  true
+)
 
 name := "ScalaJS WysiHTML."
 
@@ -15,7 +20,7 @@ version := "0.1-SNAPSHOT"
 
 organization := "io.surfkit"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 
 crossScalaVersions := Seq("2.10.4", "2.11.5")
 
@@ -33,8 +38,6 @@ scmInfo := Some(ScmInfo(
     url("https://github.com/coreyauger/scala-js-wysihtml"),
     "scm:git:git@github.com/coreyauger/scala-js-wysihtml.git",
     Some("scm:git:git@github.com:coreyauger/scala-js-wysihtml.git")))
-
-publishMavenStyle := true
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
