@@ -1,8 +1,8 @@
-import SonatypeKeys._
+//import SonatypeKeys._
 
 import sbt.Keys._
 
-sonatypeSettings
+//sonatypeSettings
 
 lazy val root = project.in(file("."))
   .enablePlugins(ScalaJSPlugin).settings(
@@ -39,13 +39,15 @@ scmInfo := Some(ScmInfo(
     "scm:git:git@github.com/coreyauger/scala-js-wysihtml.git",
     Some("scm:git:git@github.com:coreyauger/scala-js-wysihtml.git")))
 
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
+publishMavenStyle :=  true
+
+//publishTo := {
+//  val nexus = "https://oss.sonatype.org/"
+//  if (isSnapshot.value)
+//    Some("snapshots" at nexus + "content/repositories/snapshots")
+//  else
+//    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+//}
 
 pomExtra := (
   <developers>
