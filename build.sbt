@@ -16,7 +16,7 @@ name := "ScalaJS WysiHTML."
 
 normalizedName := "scala-js-wysihtml"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.0.1"
 
 organization := "io.surfkit"
 
